@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 30, 2024 at 04:57 PM
+-- Generation Time: Feb 11, 2024 at 08:54 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -173,7 +173,8 @@ INSERT INTO `kurir` (`id_kurir`, `nama`, `jenis_kelamin`, `telepon`, `alamat`, `
 ('KRR05', 'UDRI', 'Laki-Laki', '081210426881', 'TANGERANG', 'a82ae164e11127090055c6c7fbb6a888'),
 ('KRR06', 'SAEPUL', 'Laki-Laki', '081314485383', 'TANGERANG', '1cdb001697052dcdf055da6b82124bc3'),
 ('KRR07', 'yanto', 'Laki-Laki', '081284213311', 'Gandul, 16512', '81dc9bdb52d04dc20036dbd8313ed055'),
-('KRR08', 'SUJONO', 'Laki-Laki', '0812345678', 'Jonggol, West Java', '81dc9bdb52d04dc20036dbd8313ed055');
+('KRR08', 'SUJONO', 'Laki-Laki', '0812345678', 'Jonggol, West Java', '81dc9bdb52d04dc20036dbd8313ed055'),
+('KRR09', 'ADIT', 'Laki-Laki', '13192038120', 'Banjarbaru', '407339954babda0c4ab38ceef81c0bda');
 
 -- --------------------------------------------------------
 
@@ -230,10 +231,8 @@ CREATE TABLE `pengiriman` (
   `id_kurir` varchar(5) NOT NULL,
   `id_rate` varchar(50) DEFAULT NULL,
   `no_kendaraan` varchar(8) DEFAULT NULL,
-  `no_po` varchar(15) DEFAULT NULL,
   `keterangan` varchar(150) DEFAULT NULL,
   `penerima` varchar(50) DEFAULT NULL,
-  `photo` varchar(200) DEFAULT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -241,17 +240,17 @@ CREATE TABLE `pengiriman` (
 -- Dumping data for table `pengiriman`
 --
 
-INSERT INTO `pengiriman` (`id_pengiriman`, `tanggal`, `id_pelanggan`, `id_kurir`, `id_rate`, `no_kendaraan`, `no_po`, `keterangan`, `penerima`, `photo`, `status`) VALUES
-('KRM20240130002', '2024-01-30', 'CST0002', 'KRR01', 'RTE0002', NULL, NULL, NULL, NULL, NULL, 1),
-('KRM20240130003', '2024-01-30', 'CST0001', 'KRR05', 'RTE0001', NULL, NULL, NULL, NULL, NULL, 1),
-('KRM20240130004', '2024-01-30', 'CST0001', 'KRR04', 'RTE0001', NULL, NULL, NULL, NULL, NULL, 1),
-('KRM20240130005', '2024-01-30', 'CST0003', 'KRR04', 'RTE0002', NULL, NULL, NULL, NULL, NULL, 1),
-('KRM20240130006', '2024-01-30', 'CST0002', 'KRR06', 'RTE0001', NULL, NULL, NULL, NULL, NULL, 1),
-('KRM20240130007', '2024-01-30', 'CST0003', 'KRR02', 'RTE0002', NULL, NULL, NULL, NULL, NULL, 1),
-('KRM20240130008', '2024-01-30', 'CST0003', 'KRR04', 'RTE0001', NULL, NULL, 'sudah di terima dengan baik', 'Penjaga Toko', NULL, 2),
-('KRM20240130009', '2024-01-30', 'CST0003', 'KRR01', 'RTE0002', NULL, NULL, NULL, NULL, NULL, 1),
-('KRM20240130010', '2024-01-30', 'CST0001', 'KRR04', 'RTE0001', NULL, NULL, NULL, NULL, NULL, 1),
-('KRM20240130011', '2024-01-30', 'CST0001', 'KRR05', 'RTE0001', NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `pengiriman` (`id_pengiriman`, `tanggal`, `id_pelanggan`, `id_kurir`, `id_rate`, `no_kendaraan`, `keterangan`, `penerima`, `status`) VALUES
+('KRM20240130002', '2024-01-30', 'CST0002', 'KRR01', 'RTE0002', NULL, NULL, NULL, 1),
+('KRM20240130003', '2024-01-30', 'CST0001', 'KRR05', 'RTE0001', NULL, NULL, NULL, 1),
+('KRM20240130004', '2024-01-30', 'CST0001', 'KRR04', 'RTE0001', NULL, NULL, NULL, 1),
+('KRM20240130005', '2024-01-30', 'CST0003', 'KRR04', 'RTE0002', NULL, NULL, NULL, 1),
+('KRM20240130006', '2024-01-30', 'CST0002', 'KRR06', 'RTE0001', NULL, NULL, NULL, 1),
+('KRM20240130007', '2024-01-30', 'CST0003', 'KRR02', 'RTE0002', NULL, NULL, NULL, 1),
+('KRM20240130008', '2024-01-30', 'CST0003', 'KRR04', 'RTE0001', NULL, 'sudah di terima dengan baik', 'Penjaga Toko', 2),
+('KRM20240130009', '2024-01-30', 'CST0003', 'KRR01', 'RTE0002', NULL, NULL, NULL, 1),
+('KRM20240130010', '2024-01-30', 'CST0001', 'KRR04', 'RTE0001', NULL, NULL, NULL, 1),
+('KRM20240130011', '2024-01-30', 'CST0001', 'KRR05', 'RTE0001', NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
