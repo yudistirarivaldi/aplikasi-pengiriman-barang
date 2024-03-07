@@ -61,9 +61,9 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="password" class="col-sm-2 control-label">Password</label>
+								<!-- <label for="password" class="col-sm-2 control-label">Password</label> -->
 								<div class="col-sm-4">
-								  <input type="password" class="form-control" id="password" placeholder="input password" name="password" <?php $data->id_kurir == "" ? "required='required'" : "" ;?> value="" >
+								  <input type="hidden" class="form-control" id="password" placeholder="input password" name="password" <?php $data->id_kurir == "" ? "required='required'" : "" ;?> value="mantul" >
 								</div>
 							</div>
 						</div>

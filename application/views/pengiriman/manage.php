@@ -319,7 +319,7 @@ function deleteBarang(a)
 		<div class="row">
 			<div class="col-md-12">
 				<div class="box box-primary">
-					<form  class="form-horizontal" method="post" action="<?php echo site_url("pengiriman/save")?>"  >
+					<form  class="form-horizontal" method="post" action="<?php echo site_url("pengiriman/save")?>" enctype="multipart/form-data">
 						<input type="hidden" class="form-control" id="id" name="id" value="<?php echo $data->id_pengiriman; ?>" >
 						<div class="box-body">
 							<div class="form-group">
@@ -398,9 +398,9 @@ function deleteBarang(a)
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="keterangan" class="col-sm-2 control-label">Keterangan</label>
+								<label for="keterangan" class="col-sm-2 control-label">Bukti Terima Barang</label>
 								<div class="col-sm-7">
-									 <textarea class="form-control"  rows="3" id="keterangan" name="keterangan"><?php echo $data->keterangan; ?></textarea>
+									 <input type="file" class="form-control" id="userfile" name="userfile" value="<?php echo $data->keterangan; ?>" />
 								</div>
 							</div>
 							<?php endif;	?>
@@ -453,8 +453,6 @@ function deleteBarang(a)
 						
 						<div class="box-footer">
 							<button type="submit" class="btn btn-primary" name="action" value="save">save</button>
-							<button type="submit" class="btn btn-success" name="action" value="saveexit">save & exit</button>
-							<button type="reset" class="btn btn-warning">reset</button>
 							<a  href="<?php echo site_url("pengiriman")?>" class="btn btn-danger">cancel</a>
 						</div>
 					</form>

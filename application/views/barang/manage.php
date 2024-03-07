@@ -49,12 +49,7 @@
 									</select>
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="del_no" class="col-sm-2 control-label">Del No</label>
-								<div class="col-sm-4">
-								  <input type="text" class="form-control"  required="required" id="del_no"  name="del_no" placeholder="input del no" value="<?php echo $data->del_no; ?>"  >
-								</div>
-							</div>
+								  <input type="hidden" class="form-control"  required="required" id="del_no"  name="del_no" placeholder="input del no" value="null"  >
 							<div class="form-group">
 								<label for="harga" class="col-sm-2 control-label">Harga</label>
 								<div class="col-sm-4">

@@ -71,6 +71,8 @@ class Pengiriman extends Admin_Controller {
 		$data['data']->no_po = "";
 		$data['data']->no_kendaraan = "";
 		$data['data']->autocode = $this->generate_code();
+
+		
 		
 		if($id)
 		{
@@ -89,8 +91,25 @@ class Pengiriman extends Admin_Controller {
 		$data = array();
 		$post = $this->input->post();
 		
+		$config['upload_path']   = './upload/';  // Ganti path upload sesuai dengan struktur direktori CodeIgniter
+		$config['allowed_types'] = 'gif|jpg|jpeg|png';
+
+		$this->load->library('upload', $config);
+
 		if($post)
 		{
+
+			$file_name = "";
+
+			if ($this->upload->do_upload('userfile')) {  // Ganti 'keterangan' dengan 'userfile' sesuai dengan input file di formulir
+				$upload_data = $this->upload->data();
+				$file_name = $upload_data['file_name'];
+			} else {
+				echo "gak ada bro";
+			}
+
+			$data['keterangan'] = $file_name;
+
 			$error = array();
 			$id = $post['id'];
 			
@@ -134,13 +153,10 @@ class Pengiriman extends Admin_Controller {
 				if(!empty($post['penerima']))
 					$data['penerima'] = $post['penerima'];
 				else
-					$error[] = "keterangan tidak boleh kosong";
-				
-				if(!empty($post['keterangan']))
-					$data['keterangan'] = $post['keterangan'];
-				else
-					$error[] = "keterangan tidak boleh kosong";
+				$error[] = "keterangan tidak boleh kosong";				
+
 			}
+
 			
 			if(empty($error))
 			{
@@ -199,6 +215,8 @@ class Pengiriman extends Admin_Controller {
 		else
 		  redirect("pengiriman");
 	}
+
+	
 	
 	public function delete($id = "")
 	{
@@ -225,27 +243,24 @@ class Pengiriman extends Admin_Controller {
 	
 	public function generate_code()
 	{
-    $prefix = "KRM" . date("Ymd");
-    $code = "001";
+		$prefix = "KRM" . date("Ymd");
+		$code = "001";
 
-    $last = $this->pengiriman_model->get_last();
+		$last = $this->pengiriman_model->get_last();
 
-    if (!empty($last)) {
-        // Mengambil nomor urutan terakhir
-        $lastNumber = (int) substr($last->id_pengiriman, -3);
+		if (!empty($last)) {
+			// Mengambil nomor urutan terakhir
+			$lastNumber = (int) substr($last->id_pengiriman, -3);
 
-        // Menghasilkan nomor urutan baru
-        $number = $lastNumber + 1;
+			// Menghasilkan nomor urutan baru
+			$number = $lastNumber + 1;
 
-        // Menghasilkan kode dengan padding nol
-        $code = str_pad($number, 3, "0", STR_PAD_LEFT);
-    }
+			// Menghasilkan kode dengan padding nol
+			$code = str_pad($number, 3, "0", STR_PAD_LEFT);
+		}
 
-    return $prefix . $code;
+		return $prefix . $code;
 	}
-
-
-
 	
 	public  function cetak($id)
 	{
@@ -393,11 +408,26 @@ class Pengiriman extends Admin_Controller {
         } else {
             if ($action == "pdf") {
                 $pdf = new FPDF('L', 'mm','Letter');  // Gunakan kelas MyPDF yang sudah Anda ubah namanya
-                $pdf->SetTitle($title);
 				$pdf->AddPage();
-        		$pdf->SetFont('Arial','B',16);
-				$pdf->Cell(0,7,'Laporan Barang di Kirim',0,1,'C');
+				$pdf->Image('assets/images/massindo.png', 10,6,40,24);
+				$pdf->SetFont('Times','B','20');
+				$pdf->Cell(0,5,'PT MASSINDO SOLARIS NUSANTARA BANJARMASIN',0,1,'C');
+				$pdf->SetFont('Times','I','12');
+				$pdf->Cell(0,5,'Jl. A. Yani KM.21 Pergudangan LIK NO 6B Banjarbaru - Kalimantan Selatan',0,1,'C');
+				$pdf->Cell(0,5,'Telp. 0812-5158-2818',0,15,'C');
+				$pdf->Cell(0,20,'',0,15,'C');
+
+				$pdf->SetLineWidth(1);
+				$pdf->Line(10,36,250,36);
+				$pdf->SetLineWidth(0);
+				$pdf->Line(10,37,250,37);
+
+				$pdf->SetFont('Times','B',14);
+				$pdf->Cell(0,5,'Laporan Barang Yang di Kirim' ,0,5,'C');
+				$pdf->SetFont('Times','I','10');
+				$pdf->Cell(0,5,'dicetak pada tanggal : ' . date('d M y'),0,15,'C');
 				$pdf->Cell(10,7,'',0,1);
+				
 				$pdf->SetFont('Arial','B',10);
 				$pdf->Cell(10,6,'No',1,0,'C');
 				$pdf->Cell(70,6,'Pelanggan',1,0,'C');
@@ -421,6 +451,11 @@ class Pengiriman extends Admin_Controller {
 					
 				}
 
+				
+				$pdf->SetFont('Times','B','10');
+				$pdf->Cell(229,50,'Pimpinan / Direktur', 10, 10,'R');
+				$pdf->Cell(223,5,'I Gusti Andi', 10, 10,'R');
+
                 $pdf->Output($file_name . '.pdf', 'I');
             }
         }
@@ -440,11 +475,24 @@ class Pengiriman extends Admin_Controller {
         } else {
             if ($action == "pdf") {
                 $pdf = new FPDF('L', 'mm','Letter');  // Gunakan kelas MyPDF yang sudah Anda ubah namanya
-                $pdf->SetTitle($title);
 				$pdf->AddPage();
-        		$pdf->SetFont('Arial','B',16);
-				$pdf->Cell(0,7,'Laporan Pengiriman Barang',0,1,'C');
-				$pdf->Cell(10,7,'',0,1);
+				$pdf->Image('assets/images/massindo.png', 10,6,40,24);
+				$pdf->SetFont('Times','B','20');
+				$pdf->Cell(0,5,'PT MASSINDO SOLARIS NUSANTARA BANJARMASIN',0,1,'C');
+				$pdf->SetFont('Times','I','12');
+				$pdf->Cell(0,5,'Jl. A. Yani KM.21 Pergudangan LIK NO 6B Banjarbaru - Kalimantan Selatan',0,1,'C');
+				$pdf->Cell(0,5,'Telp. 0812-5158-2818',0,15,'C');
+				$pdf->Cell(0,20,'',0,15,'C');
+
+				$pdf->SetLineWidth(1);
+				$pdf->Line(10,36,250,36);
+				$pdf->SetLineWidth(0);
+				$pdf->Line(10,37,250,37);
+	
+				$pdf->SetFont('Times','B',14);
+				$pdf->Cell(0,10,'Laporan Pengiriman Barang' ,0,5,'C');
+				$pdf->SetFont('Times','I','10');
+				$pdf->Cell(0,5,'dicetak pada tanggal : ' . date('d M y'),0,15,'C');
 				$pdf->SetFont('Arial','B',10);
 				$pdf->Cell(10,6,'No',1,0,'C');
 				$pdf->Cell(40,6,'Tanggal',1,0,'C');
@@ -468,6 +516,12 @@ class Pengiriman extends Admin_Controller {
 					$pdf->Cell(40,6,$dt['wilayah'],1,1, 'C');
 				}
 
+				$pdf->SetFont('Times','B','10');
+				$pdf->Cell(229,70,'Pimpinan / Direktur', 10, 10,'R');
+				$pdf->Cell(223,5,'I Gusti Andi', 10, 10,'R');
+				
+
+				
                 $pdf->Output($file_name . '.pdf', 'I');
             }
         }

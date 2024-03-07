@@ -43,8 +43,8 @@
 							<th>TANGGAL</th>
 							<th>PELANGGAN</th>
 							<th>KURIR</th>
-							<th>PENERIMA</th>
-							<!-- <th>KETERANGAN</th> -->
+							<!-- <th>PENERIMA</th> -->
+							<th>BUKTI TERIMA</th>
 							<th>RATE</th>
 							<th>JAM</th>
 							<th>WILAYAH</th>
@@ -73,7 +73,18 @@ foreach ($data as $dt) {
         <td><?php echo date("d-m-Y", strtotime($dt['tanggal'])); ?></td>
         <td><?php echo $dt['pelanggan']; ?></td>
         <td><?php echo $dt['kurir']; ?></td>
-        <td><?php echo $dt['penerima']; ?></td>
+        <!-- <td><?php echo $dt['penerima']; ?></td> -->
+		<td>
+    <?php if (!empty($dt['keterangan'])): ?>
+        <!-- <a class="btn btn-primary btn-xs" target="blank" href="<?= base_url('../../../upload/' . $dt['keterangan']);?>">
+            <span class="glyphicon glyphicon-print"></span>
+        </a> -->
+		<img src="<?= base_url('../../../upload/' . $dt['keterangan']);?>" width="100px" alt="">
+    <?php else: ?>
+        Belum ada foto
+    <?php endif; ?>
+</td>
+        <!-- <td><a class="btn btn-primary btn-xs" target="blank" href="<?= base_url('../../../upload/' . $dt['keterangan']);?>"><span class="glyphicon glyphicon-print"></span></a></td> -->
         <td><?php echo $dt['rate']; ?></td>
         <td><?php echo $dt['jam']; ?></td>
         <td><?php echo $dt['wilayah']; ?></td>

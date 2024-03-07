@@ -265,11 +265,26 @@ class Jadwal extends Admin_Controller {
         } else {
             if ($action == "pdf") {
                 $pdf = new FPDF('L', 'mm','Letter');  // Gunakan kelas MyPDF yang sudah Anda ubah namanya
-                $pdf->SetTitle($title);
 				$pdf->AddPage();
-        		$pdf->SetFont('Arial','B',16);
-				$pdf->Cell(0,7,'Laporan Jadwal Keberangkatan',0,1,'C');
-				$pdf->Cell(10,7,'',0,1);
+        		
+				$pdf->Image('assets/images/massindo.png', 10,6,40,24);
+				$pdf->SetFont('Times','B','20');
+				$pdf->Cell(0,5,'PT MASSINDO SOLARIS NUSANTARA BANJARMASIN',0,1,'C');
+				$pdf->SetFont('Times','I','12');
+				$pdf->Cell(0,5,'Jl. A. Yani KM.21 Pergudangan LIK NO 6B Banjarbaru - Kalimantan Selatan',0,1,'C');
+				$pdf->Cell(0,5,'Telp. 0812-5158-2818',0,15,'C');
+				$pdf->Cell(0,20,'',0,15,'C');
+
+				$pdf->SetLineWidth(1);
+				$pdf->Line(10,36,250,36);
+				$pdf->SetLineWidth(0);
+				$pdf->Line(10,37,250,37);
+
+				$pdf->SetFont('Times','B',14);
+				$pdf->Cell(0,5,'Laporan Jadwal Keberangkatan ' ,0,5,'C');
+				$pdf->SetFont('Times','I','10');
+				$pdf->Cell(0,5,'dicetak pada tanggal : ' . date('d M y'),0,15,'C');
+				
 				$pdf->SetFont('Arial','B',10);
 				$pdf->Cell(10,6,'No',1,0,'C');
 				$pdf->Cell(50,6,'ID jadwal',1,0,'C');
@@ -291,6 +306,10 @@ class Jadwal extends Admin_Controller {
 					$pdf->Cell(20,6,$row['rate'],1,0, 'C');
 					$pdf->Cell(40,6,$row['wilayah'],1,1, 'C');
 				}
+
+				$pdf->SetFont('Times','B','10');
+				$pdf->Cell(229,50,'Pimpinan / Direktur', 10, 10,'R');
+				$pdf->Cell(223,5,'I Gusti Andi', 10, 10,'R');
 
                 $pdf->Output($file_name . '.pdf', 'I');
             }
