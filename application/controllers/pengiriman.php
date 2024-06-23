@@ -9,6 +9,7 @@ class Pengiriman extends Admin_Controller {
         parent::__construct();
 
 		$this->load->model("pengiriman_model");
+		$this->load->library('email');
     }
 	public function index()
 	{
@@ -153,7 +154,7 @@ class Pengiriman extends Admin_Controller {
 				if(!empty($post['penerima']))
 					$data['penerima'] = $post['penerima'];
 				else
-				$error[] = "keterangan tidak boleh kosong";				
+				$error[] = "penerima tidak boleh kosong";				
 
 			}
 
@@ -168,6 +169,10 @@ class Pengiriman extends Admin_Controller {
 				}
 			}
 			
+			if($data['status'] == 2 ) {
+				$this->send_email($data['id_pengiriman']);
+			}
+
 			if(empty($error))
 			{
 				$save = $this->pengiriman_model->save($id,$data,false);
@@ -194,6 +199,7 @@ class Pengiriman extends Admin_Controller {
 				}
 				
 				
+				
 				$this->session->set_flashdata('admin_save_success', "data berhasil disimpan");
 				
 				if($post['action'] == "save")
@@ -216,7 +222,101 @@ class Pengiriman extends Admin_Controller {
 		  redirect("pengiriman");
 	}
 
-	
+	public function send_email($order_id)
+    {
+        // Load the email library
+        $this->load->library('email');
+
+        // Set email preferences
+        $config = array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'smtp.gmail.com',
+            'smtp_user' => 'yudistirarivaldii1234@gmail.com',
+            'smtp_pass' => 'nssb ipwj joff ndvm', // Kata sandi aplikasi Gmail
+            'smtp_port' => 587,
+            'smtp_crypto' => 'tls',
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'wordwrap' => TRUE,
+            'newline' => "\r\n",
+            'smtp_timeout' => 30,
+            'smtp_debug' => 4 // Tingkat debugging tinggi
+        );
+
+        // Initialize email with the configuration
+        $this->email->initialize($config);
+
+		$delivery_date = date("d-m-Y");
+		$message = "
+				<html>
+				<head>
+					<title>Pemberitahuan Pengiriman</title>
+					<style>
+						body {
+							font-family: Arial, sans-serif;
+							background-color: #f4f4f4;
+							margin: 0;
+							padding: 0;
+						}
+						.container {
+							width: 80%;
+							margin: 0 auto;
+							background-color: #ffffff;
+							padding: 20px;
+							box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+						}
+						.header {
+							background-color: #4CAF50;
+							color: #ffffff;
+							padding: 10px 0;
+							text-align: center;
+						}
+						.content {
+							margin: 20px 0;
+						}
+						.content p {
+							font-size: 16px;
+							line-height: 1.5;
+						}
+						.footer {
+							background-color: #f1f1f1;
+							color: #333333;
+							padding: 10px 0;
+							text-align: center;
+						}
+					</style>
+				</head>
+				<body>
+					<div class='container'>
+						<div class='header'>
+							<h1>Pengiriman Barang</h1>
+						</div>
+						<div class='content'>
+							<p>Kami ingin memberitahukan bahwa barang Anda dengan ID pesanan <strong>{$order_id}</strong> telah sampai pada tanggal <strong>{$delivery_date}</strong>.</p>
+							<p>Terima kasih telah berbelanja dengan kami.</p>
+						</div>
+						<div class='footer'>
+							<p>Salam,</p>
+							<p>Tim Pengiriman</p>
+						</div>
+					</div>
+				</body>
+				</html>
+				";
+
+        // Email content
+        $this->email->from('yudistirarivaldii1234@gmail.com', 'Yudistira Rivaldi');
+        $this->email->to('rivaldiyudistira123@gmail.com');
+        $this->email->subject('Email Test');
+        $this->email->message($message);
+
+        // Send email and check for errors
+        if ($this->email->send()) {
+            echo 'Email sent successfully.';
+        } else {
+            show_error($this->email->print_debugger());
+        }
+    }
 	
 	public function delete($id = "")
 	{
