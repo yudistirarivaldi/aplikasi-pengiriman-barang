@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 07, 2024 at 04:49 PM
+-- Generation Time: Aug 12, 2024 at 01:25 PM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -71,37 +71,33 @@ CREATE TABLE `detail_pengiriman` (
 --
 
 INSERT INTO `detail_pengiriman` (`id_detail`, `id_pengiriman`, `id_barang`, `qty`) VALUES
-(181, 'KRM20240130005', 'BRG0005', 1),
-(182, 'KRM20240130005', 'BRG0006', 1),
-(183, 'KRM20240130005', 'BRG0007', 1),
-(188, 'KRM20240130007', 'BRG0004', 1),
-(189, 'KRM20240130007', 'BRG0008', 1),
-(190, 'KRM20240130007', 'BRG0001', 1),
-(202, 'KRM20240130009', 'BRG0004', 1),
-(203, 'KRM20240130009', 'BRG0009', 1),
-(204, 'KRM20240130009', 'BRG0002', 1),
-(205, 'KRM20240130009', 'BRG0001', 1),
-(206, 'KRM20240130009', 'BRG0007', 1),
 (207, 'KRM20240130010', 'BRG0004', 1),
 (208, 'KRM20240130010', 'BRG0007', 1),
 (209, 'KRM20240130010', 'BRG0002', 1),
 (210, 'KRM20240130010', 'BRG0006', 1),
 (211, 'KRM20240130010', 'BRG0003', 1),
-(265, 'KRM20240130002', 'BRG0004', 1),
-(266, 'KRM20240130002', 'BRG0005', 1),
-(267, 'KRM20240130003', 'BRG0004', 1),
-(268, 'KRM20240130003', 'BRG0006', 1),
-(269, 'KRM20240130008', 'BRG0001', 10),
-(270, 'KRM20240130008', 'BRG0004', 5),
-(271, 'KRM20240130008', 'BRG0007', 1),
-(273, 'KRM20240130004', 'BRG0009', 1),
-(274, 'KRM20240130006', 'BRG0001', 1),
-(275, 'KRM20240130006', 'BRG0004', 1),
-(276, 'KRM20240130006', 'BRG0009', 1),
-(277, 'KRM20240130006', 'BRG0005', 1),
-(278, 'KRM20240130011', 'BRG0003', 100),
-(279, 'KRM20240130011', 'BRG0009', 1),
-(280, 'KRM20240130011', 'BRG0005', 1);
+(285, 'KRM20240130002', 'BRG0004', 222222),
+(286, 'KRM20240130002', 'BRG0005', 1),
+(287, 'KRM20240623012', 'BRG0010', 1),
+(288, 'KRM20240623013', 'BRG0001', 1),
+(289, 'KRM20240623014', 'BRG0004', 1),
+(290, 'KRM20240623015', 'BRG0001', 1),
+(291, 'KRM20240623016', 'BRG0002', 1),
+(292, 'KRM20240623017', 'BRG0001', 1),
+(293, 'KRM20240623018', 'BRG0005', 1),
+(294, 'KRM20240130003', 'BRG0004', 1),
+(295, 'KRM20240130003', 'BRG0006', 1),
+(296, 'KRM20240130004', 'BRG0009', 1),
+(297, 'KRM20240130007', 'BRG0001', 1),
+(298, 'KRM20240130007', 'BRG0004', 1),
+(299, 'KRM20240130007', 'BRG0008', 1),
+(303, 'KRM20240130009', 'BRG0001', 1),
+(304, 'KRM20240130009', 'BRG0004', 1),
+(305, 'KRM20240130009', 'BRG0009', 1),
+(306, 'KRM20240130009', 'BRG0007', 1),
+(307, 'KRM20240130005', 'BRG0005', 1),
+(308, 'KRM20240130005', 'BRG0006', 1),
+(309, 'KRM20240130005', 'BRG0007', 1);
 
 -- --------------------------------------------------------
 
@@ -207,18 +203,18 @@ CREATE TABLE `pelanggan` (
   `id_pelanggan` varchar(7) NOT NULL,
   `nama` varchar(30) NOT NULL,
   `telepon` varchar(15) NOT NULL,
-  `alamat` varchar(150) NOT NULL
-  `email` varchar(50) NOT NULL
+  `alamat` varchar(150) NOT NULL,
+  `email` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pelanggan`
 --
 
-INSERT INTO `pelanggan` (`id_pelanggan`, `nama`, `telepon`, `alamat`) VALUES
-('CST0001', 'ASTRA OTOPART', '021-4603550', 'jakarta'),
-('CST0002', 'Idemitsu Lube Indonesia', '021-8911 4611', 'JL Permata Raya, Kawasan Industri KIIC, Lot BB/4A, Karawang, Jawa Barat,'),
-('CST0003', 'Federal Karyatama', '021-4613583', 'Jl. Pulobuaran Raya, RW.9, Jatinegara, Cakung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13910');
+INSERT INTO `pelanggan` (`id_pelanggan`, `nama`, `telepon`, `alamat`, `email`) VALUES
+('CST0001', 'ASTRA OTOPART', '021-4603550', 'jakarta', 'yudistirarivaldii1234@gmail.com'),
+('CST0002', 'Idemitsu Lube Indonesia', '021-8911 4611', 'JL Permata Raya, Kawasan Industri KIIC, Lot BB/4A, Karawang, Jawa Barat,', 'yudistirarivaldii1234@gmail.com'),
+('CST0003', 'Federal Karyatama', '021-4613583', 'Jl. Pulobuaran Raya, RW.9, Jatinegara, Cakung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13910', 'yudistirarivaldii1234@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -243,16 +239,41 @@ CREATE TABLE `pengiriman` (
 --
 
 INSERT INTO `pengiriman` (`id_pengiriman`, `tanggal`, `id_pelanggan`, `id_kurir`, `id_rate`, `no_kendaraan`, `keterangan`, `penerima`, `status`) VALUES
-('KRM20240130002', '2024-01-30', 'CST0002', 'KRR01', 'RTE0002', NULL, NULL, NULL, 1),
-('KRM20240130003', '2024-01-30', 'CST0001', 'KRR05', 'RTE0001', NULL, NULL, NULL, 1),
-('KRM20240130004', '2024-01-30', 'CST0001', 'KRR04', 'RTE0001', NULL, NULL, NULL, 1),
-('KRM20240130005', '2024-01-30', 'CST0003', 'KRR04', 'RTE0002', NULL, NULL, NULL, 1),
-('KRM20240130006', '2024-01-30', 'CST0002', 'KRR06', 'RTE0001', NULL, NULL, NULL, 1),
-('KRM20240130007', '2024-01-30', 'CST0003', 'KRR02', 'RTE0002', NULL, NULL, NULL, 1),
-('KRM20240130008', '2024-01-30', 'CST0003', 'KRR04', 'RTE0001', NULL, 'sudah di terima dengan baik', 'Penjaga Toko', 2),
-('KRM20240130009', '2024-01-30', 'CST0003', 'KRR01', 'RTE0002', NULL, NULL, NULL, 1),
+('KRM20240130002', '2024-01-30', 'CST0002', 'KRR01', 'RTE0002', NULL, '', 'MANTEPPPP', 2),
+('KRM20240130003', '2024-01-30', 'CST0001', 'KRR05', 'RTE0001', NULL, '', 'awdawd', 2),
+('KRM20240130004', '2024-01-30', 'CST0001', 'KRR04', 'RTE0001', NULL, '', 'mantep', 2),
+('KRM20240130005', '2024-01-30', 'CST0003', 'KRR04', 'RTE0002', NULL, '', 'adwaw', 2),
+('KRM20240130007', '2024-01-30', 'CST0003', 'KRR02', 'RTE0002', NULL, '', 'mantep', 2),
+('KRM20240130009', '2024-01-30', 'CST0003', 'KRR01', 'RTE0002', NULL, '', NULL, 1),
 ('KRM20240130010', '2024-01-30', 'CST0001', 'KRR04', 'RTE0001', NULL, NULL, NULL, 1),
-('KRM20240130011', '2024-01-30', 'CST0001', 'KRR05', 'RTE0001', NULL, NULL, NULL, 1);
+('KRM20240623012', '2024-06-23', 'CST0001', 'KRR04', 'RTE0002', NULL, '', NULL, 1),
+('KRM20240623013', '2024-06-23', 'CST0002', 'KRR01', 'RTE0002', NULL, '', NULL, 1),
+('KRM20240623014', '2024-06-23', 'CST0001', 'KRR05', 'RTE0002', NULL, '', NULL, 1),
+('KRM20240623015', '2024-06-23', 'CST0001', 'KRR01', 'RTE0002', NULL, '', NULL, 1),
+('KRM20240623016', '2024-06-23', 'CST0001', 'KRR04', 'RTE0001', NULL, '', NULL, 1),
+('KRM20240623017', '2024-06-23', 'CST0002', 'KRR01', 'RTE0002', NULL, '', NULL, 1),
+('KRM20240623018', '2024-06-23', 'CST0001', 'KRR05', 'RTE0002', NULL, '', NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `performa`
+--
+
+CREATE TABLE `performa` (
+  `id_performa` varchar(100) NOT NULL,
+  `tanggal` date NOT NULL,
+  `id_mobil` varchar(10) NOT NULL,
+  `keterangan` varchar(10) DEFAULT NULL,
+  `kondisi` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `performa`
+--
+
+INSERT INTO `performa` (`id_performa`, `tanggal`, `id_mobil`, `keterangan`, `kondisi`) VALUES
+('PRFRM20240812001', '2024-08-12', 'MBL01', 'awdawd', '2');
 
 -- --------------------------------------------------------
 
@@ -351,6 +372,12 @@ ALTER TABLE `pengiriman`
   ADD PRIMARY KEY (`id_pengiriman`);
 
 --
+-- Indexes for table `performa`
+--
+ALTER TABLE `performa`
+  ADD PRIMARY KEY (`id_performa`) USING BTREE;
+
+--
 -- Indexes for table `rate`
 --
 ALTER TABLE `rate`
@@ -370,7 +397,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `detail_pengiriman`
 --
 ALTER TABLE `detail_pengiriman`
-  MODIFY `id_detail` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=281;
+  MODIFY `id_detail` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=310;
 
 --
 -- Constraints for dumped tables
