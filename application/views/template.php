@@ -105,7 +105,16 @@
               <a href="<?php echo site_url('jadwal')?>">
                 <i class="fa fa-truck"></i> <span>Jadwal Keberangkatan</span> <i class="fa pull-right"></i>
               </a>
-            </li>
+              
+      </li>
+      <li>
+              <a href="<?php echo site_url('performa')?>">
+                <i class="fa fa-list"></i> <span>Performa Kendaraan</span> <i class="fa pull-right"></i>
+              </a>
+              
+      </li>
+
+      
 			<?php endif; ?>
 			<?php if($CI->getStatus() == '3' || $CI->getStatus() == '1' || $CI->getStatus() == '2'): ?>
 			<li>
@@ -124,10 +133,16 @@
                 <li ><a href="<?php echo site_url('pengiriman/rekap')?>"><i class="fa fa-circle-o"></i> Laporan Pengiriman</a></li>
               </ul>
               <ul class="treeview-menu">
-                <li ><a href="<?php echo site_url('jadwal/rekap')?>"><i class="fa fa-circle-o"></i> Laporan Jadwal</a></li>
+                <li ><a href="<?php echo site_url('pengiriman/rekap_surat_jalan')?>"><i class="fa fa-circle-o"></i> Rekap Surat Jalan Di Terima</a></li>
+              </ul>
+              <ul class="treeview-menu">
+                <li ><a href="<?php echo site_url('jadwal/rekap')?>"><i class="fa fa-circle-o"></i> Laporan Jadwal Keberangkatan</a></li>
               </ul>
               <ul class="treeview-menu">
                 <li ><a href="<?php echo site_url('pengiriman/rekap_barang')?>"><i class="fa fa-circle-o"></i> Laporan Barang </a></li>
+              </ul>
+              <ul class="treeview-menu">
+                <li ><a href="<?php echo site_url('performa/rekap')?>"><i class="fa fa-circle-o"></i> Laporan Performa Kendaraan</a></li>
               </ul>
             </li>
 			<?php endif; ?>

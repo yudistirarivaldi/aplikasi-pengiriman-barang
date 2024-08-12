@@ -208,6 +208,7 @@ CREATE TABLE `pelanggan` (
   `nama` varchar(30) NOT NULL,
   `telepon` varchar(15) NOT NULL,
   `alamat` varchar(150) NOT NULL
+  `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

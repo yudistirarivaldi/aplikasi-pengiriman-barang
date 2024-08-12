@@ -123,6 +123,8 @@ class Pengiriman extends Admin_Controller {
 				$data['tanggal'] =  DateTime::createFromFormat('d/m/Y', $post['tanggal'])->format('Y-m-d');
 			else
 				$error[] = "tanggal tidak boleh kosong"; 
+
+			
 			
 			if(!empty($post['id_pelanggan']))
 				$data['id_pelanggan'] = $post['id_pelanggan'];
@@ -170,7 +172,7 @@ class Pengiriman extends Admin_Controller {
 			}
 			
 			if($data['status'] == 2 ) {
-				$this->send_email($data['id_pengiriman']);
+				$this->send_email($data['id_pengiriman'], $post['email']);
 			}
 
 			if(empty($error))
@@ -222,7 +224,7 @@ class Pengiriman extends Admin_Controller {
 		  redirect("pengiriman");
 	}
 
-	public function send_email($order_id)
+	public function send_email($order_id, $email)
     {
         // Load the email library
         $this->load->library('email');
@@ -306,7 +308,7 @@ class Pengiriman extends Admin_Controller {
 
         // Email content
         $this->email->from('yudistirarivaldii1234@gmail.com', 'Yudistira Rivaldi');
-        $this->email->to('rivaldiyudistira123@gmail.com');
+        $this->email->to($email);
         $this->email->subject('Email Test');
         $this->email->message($message);
 
@@ -626,6 +628,72 @@ class Pengiriman extends Admin_Controller {
             }
         }
     }
+
+	public function export_rekap_jalan($action, $data, $filter)
+    {
+        // $this->cekLoginStatus("planner", true);
+
+        $title = "Laporan Data Pengiriman Barang";
+        $file_name = $title . "_" . date("Y-m-d");
+        $headerTitle = $title;
+
+        if (empty($data)) {
+            $this->session->set_flashdata('admin_save_error', "data tidak tersedia");
+            redirect("pengiriman/rekap?from=" . $filter->from . "&to=" . $filter->to . "&status=" . $filter->status);
+        } else {
+            if ($action == "pdf") {
+                $pdf = new FPDF('L', 'mm','Letter');  // Gunakan kelas MyPDF yang sudah Anda ubah namanya
+				$pdf->AddPage();
+				$pdf->Image('assets/images/massindo.png', 10,6,40,24);
+				$pdf->SetFont('Times','B','20');
+				$pdf->Cell(0,5,'PT MASSINDO SOLARIS NUSANTARA BANJARMASIN',0,1,'C');
+				$pdf->SetFont('Times','I','12');
+				$pdf->Cell(0,5,'Jl. A. Yani KM.21 Pergudangan LIK NO 6B Banjarbaru - Kalimantan Selatan',0,1,'C');
+				$pdf->Cell(0,5,'Telp. 0812-5158-2818',0,15,'C');
+				$pdf->Cell(0,20,'',0,15,'C');
+
+				$pdf->SetLineWidth(1);
+				$pdf->Line(10,36,250,36);
+				$pdf->SetLineWidth(0);
+				$pdf->Line(10,37,250,37);
+	
+				$pdf->SetFont('Times','B',14);
+				$pdf->Cell(0,10,'Laporan Rekap Surat Jalan Di Terima' ,0,5,'C');
+				$pdf->SetFont('Times','I','10');
+				$pdf->Cell(0,5,'dicetak pada tanggal : ' . date('d M y'),0,15,'C');
+				$pdf->SetFont('Arial','B',10);
+				$pdf->Cell(10,6,'No',1,0,'C');
+				$pdf->Cell(40,6,'Tanggal',1,0,'C');
+				$pdf->Cell(70,6,'Pelanggan',1,0,'C');
+				$pdf->Cell(50,6,'Kurir',1,0,'C');
+				
+
+				$pdf->Cell(40,6,'Jam',1,0,'C');
+				$pdf->Cell(40,6,'Wilayah',1,1,'C');
+				
+        		$pdf->SetFont('Arial','',10);
+				$no = 0;
+				
+                foreach ($data as $dt) {
+                    $no++;
+					$pdf->Cell(10,6,$no,1,0, 'C');
+					$pdf->Cell(40,6,$dt['tanggal'],1,0, 'C');
+					$pdf->Cell(70,6,$dt['pelanggan'],1,0, 'C');
+					$pdf->Cell(50,6,$dt['kurir'],1,0, 'C');
+					$pdf->Cell(40,6,$dt['jam'],1,0, 'C');
+					$pdf->Cell(40,6,$dt['wilayah'],1,1, 'C');
+				}
+
+				$pdf->SetFont('Times','B','10');
+				$pdf->Cell(229,70,'Pimpinan / Direktur', 10, 10,'R');
+				$pdf->Cell(223,5,'I Gusti Andi', 10, 10,'R');
+				
+
+				
+                $pdf->Output($file_name . '.pdf', 'I');
+            }
+        }
+    }
 	
 	public function generate_format($data)
 	{
@@ -659,5 +727,42 @@ class Pengiriman extends Admin_Controller {
 		
 		return $newdata;
 	}
+
+	public function rekap_surat_jalan()
+    {
+        // $this->cekLoginStatus("planner", true);
+
+        $data['title'] = "Laporan Rekap Surat Jalan Di Terima";
+        $data['layout'] = "pengiriman/rekap_surat_jalan";
+
+        $action = $this->input->get('action');
+
+        $from = $this->input->get('from');
+        $to = $this->input->get('to');
+
+        $status = $this->input->get('status');
+
+        if (!$from)
+            $from = date('Y-m-d', strtotime("-30 days"));
+
+        if (!$to)
+            $to = date("Y-m-d");
+
+        if (!$status)
+            $status = "all";
+
+        $filter = new StdClass();
+        $filter->from = date('Y-m-d', strtotime($from));
+        $filter->to = date('Y-m-d', strtotime($to));
+        $filter->status = 2;
+
+        list($data['data'], $total) = $this->pengiriman_model->getAllSuratJalanDiTerima($filter, 0, 0, "pg.id_pengiriman", "desc");
+
+        if ($action) {
+            $this->export_rekap_jalan($action, $data['data'], $filter);
+        } else {
+            $this->load->view('template', $data);
+        }
+    }
 	
 }

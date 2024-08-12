@@ -50,6 +50,7 @@ class Pelanggan extends Admin_Controller {
 		$data['data']->nama = "";
 		$data['data']->telepon = "";
 		$data['data']->alamat = "";
+		$data['data']->email = "";
 		$data['data']->autocode = $this->generate_code();
 		
 		if($id)
@@ -91,6 +92,11 @@ class Pelanggan extends Admin_Controller {
 				$data['alamat'] = $post['alamat'];
 			else
 				$error[] = "alamat tidak boleh kosong"; 
+
+			if(!empty($post['email']))
+				$data['email'] = $post['email'];
+			else
+				$error[] = "email tidak boleh kosong"; 
 				
 			if(empty($error))
 			{

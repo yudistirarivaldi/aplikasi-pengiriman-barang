@@ -321,6 +321,8 @@ function deleteBarang(a)
 				<div class="box box-primary">
 					<form  class="form-horizontal" method="post" action="<?php echo site_url("pengiriman/save")?>" enctype="multipart/form-data">
 						<input type="hidden" class="form-control" id="id" name="id" value="<?php echo $data->id_pengiriman; ?>" >
+						<input type="hidden" class="form-control" id="email" name="email" value="<?php echo isset($data->email) ? $data->email : ''; ?>">
+
 						<div class="box-body">
 							<div class="form-group">
 								<label for="id_pengiriman" class="col-sm-2 control-label">ID Pengiriman</label>

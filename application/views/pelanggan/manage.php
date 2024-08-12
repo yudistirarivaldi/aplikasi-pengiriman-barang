@@ -51,6 +51,12 @@
 								  <textarea class="form-control"  rows="3" id="alamat" name="alamat"  placeholder="input alamat" required="required"><?php echo $data->alamat; ?></textarea>
 								</div>
 							</div>
+							<div class="form-group">
+								<label for="alamat" class="col-sm-2 control-label">Alamat</label>
+								<div class="col-sm-4">
+								  <input type="email" class="form-control"  required="required" id="email"  name="email" placeholder="input email" value="<?php echo $data->email; ?>"  >
+								</div>
+							</div>
 						</div>
 						
 						<div class="box-footer">

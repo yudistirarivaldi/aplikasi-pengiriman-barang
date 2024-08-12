@@ -26,47 +26,47 @@
 				<div class="box box-primary">
 					<div class="box-header">
 						<div class="filter-wrapper box-tools pull-right">
-								<form class="form-inline" method="get" action="<?php echo site_url("pelanggan")?>" >
+								<form class="form-inline" method="get" action="<?php echo site_url("jadwal")?>" >
 									 <div class="form-group">
 										<input type="text" class="form-control input-sm" id="keyword" placeholder="Keyword" name="keyword" value="<?php echo $this->input->get('keyword');?>">
 								  </div>
 									 <button type="submit" class="btn btn-primary btn-sm glyphicon glyphicon-search"></button>
-									 <a href="<?php echo site_url("pelanggan/manage")?>" class="btn btn-success btn-sm">add</a>
+									 <a href="<?php echo site_url("performa/manage")?>" class="btn btn-success btn-sm">add</a>
 								</form>
 						</div>
 					</div>
-						
 						<div class="box-body no-padding">
-						
 						<table class="table table-striped">
 						<thead>
 						  <tr>
-							<th>ID PELANGGAN</th>
-							<th>NAMA</th>
-							<th>TELEPON</th>
-							<th>ALAMAT</th>
-							<th>EMAIL</th>
+							<th>ID</th>
+							<th>TANGGAL</th>
+							<th>PLAT MOBIL</th>
+							<th>JENIS MOBIL</th>
+							<th>KETERANGAN</th>
+							<th>KONDISI</th>
 							<th>ACTION</th>
 						  </tr>
 						</thead>
 						<tbody>
 						<?php foreach($data as $dt): ?>
 						  <tr>
-							<td><?php echo $dt['id_pelanggan'];?></td>
-							<td><?php echo $dt['nama'];?></td>
-							<td><?php echo $dt['telepon'];?></td>
-							<td><?php echo $dt['alamat'];?></td>
-							<td><?php echo $dt['email'];?></td>
+							<td><?php echo $dt['id_performa'];?></td>
+							<td><?php echo date("d-m-Y",strtotime($dt['tanggal']));?></td>
+							<td><?php echo $dt['mobil'];?></td>
+							<td><?php echo $dt['jenis'];?></td>
+							<td><?php echo $dt['keterangan'];?></td>
+							<td><?php echo $dt['kondisi'];?></td>
 							<th>
-								<a class="btn btn-warning btn-xs" href="<?php echo site_url("pelanggan/manage")."/". $dt['id_pelanggan']; ?>"><span class="glyphicon glyphicon-edit"></span></a>
-								<a class="btn btn-danger btn-xs" data-href="<?php echo site_url("pelanggan/delete")."/". $dt['id_pelanggan'];?>" data-toggle="modal" data-target="#confirm-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a>
+								<a class="btn btn-warning btn-xs" href="<?php echo site_url("performa/manage")."/". $dt['id_performa']; ?>"><span class="glyphicon glyphicon-edit"></span></a>
+								<a class="btn btn-danger btn-xs" data-href="<?php echo site_url("performa/delete")."/". $dt['id_performa'];?>" data-toggle="modal" data-target="#confirm-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a>
 							</th>
 						  </tr>
 						<?php endforeach ?>
 						</tbody>
 					</table>
 					<?php echo $this->pagination->create_links();?>
-						</div>
+					</div>
 				
 				</div>
 			</div>
