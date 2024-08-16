@@ -113,7 +113,12 @@
               </a>
               
       </li>
-
+      <li>
+              <a href="<?php echo site_url('kualitas')?>">
+                <i class="fa fa-dropbox"></i> <span>Kualitas Barang</span>
+              </a>
+              
+      </li>
       
 			<?php endif; ?>
 			<?php if($CI->getStatus() == '3' || $CI->getStatus() == '1' || $CI->getStatus() == '2'): ?>
@@ -143,6 +148,9 @@
               </ul>
               <ul class="treeview-menu">
                 <li ><a href="<?php echo site_url('performa/rekap')?>"><i class="fa fa-circle-o"></i> Laporan Performa Kendaraan</a></li>
+              </ul>
+              <ul class="treeview-menu">
+                <li ><a href="<?php echo site_url('kualitas/rekap')?>"><i class="fa fa-circle-o"></i> Laporan Kualitas Barang</a></li>
               </ul>
             </li>
 			<?php endif; ?>

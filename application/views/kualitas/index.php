@@ -26,12 +26,12 @@
 				<div class="box box-primary">
 					<div class="box-header">
 						<div class="filter-wrapper box-tools pull-right">
-								<form class="form-inline" method="get" action="<?php echo site_url("performa")?>" >
+								<form class="form-inline" method="get" action="<?php echo site_url("kualitas")?>" >
 									 <div class="form-group">
 										<input type="text" class="form-control input-sm" id="keyword" placeholder="Keyword" name="keyword" value="<?php echo $this->input->get('keyword');?>">
 								  </div>
 									 <button type="submit" class="btn btn-primary btn-sm glyphicon glyphicon-search"></button>
-									 <a href="<?php echo site_url("performa/manage")?>" class="btn btn-success btn-sm">add</a>
+									 <a href="<?php echo site_url("kualitas/manage")?>" class="btn btn-success btn-sm">add</a>
 								</form>
 						</div>
 					</div>
@@ -41,8 +41,7 @@
 						  <tr>
 							<th>ID</th>
 							<th>TANGGAL</th>
-							<th>PLAT MOBIL</th>
-							<th>JENIS MOBIL</th>
+							<th>NAMA BARANG</th>
 							<th>KETERANGAN</th>
 							<th>KONDISI</th>
 							<th>ACTION</th>
@@ -51,16 +50,14 @@
 						<tbody>
 						<?php foreach($data as $dt): ?>
 						  <tr>
-							<td><?php echo $dt['id_performa'];?></td>
+							<td><?php echo $dt['id_kualitas'];?></td>
 							<td><?php echo date("d-m-Y",strtotime($dt['tanggal']));?></td>
-							<td><?php echo $dt['mobil'];?></td>
-							<td><?php echo $dt['jenis'];?></td>
+							<td><?php echo $dt['barang'];?></td>
 							<td><?php echo $dt['keterangan'];?></td>
-							<td><?php echo $dt['kondisi'] == 1 ? 'Bagus' : ($dt['kondisi'] == 2 ? 'Perlu Di Service' : 'Tidak Diketahui'); ?></td>
-
+							<td><?php echo $dt['kondisi'] == 1 ? 'Rusak' : 'Bagus'; ?></td>
 							<th>
-								<a class="btn btn-warning btn-xs" href="<?php echo site_url("performa/manage")."/". $dt['id_performa']; ?>"><span class="glyphicon glyphicon-edit"></span></a>
-								<a class="btn btn-danger btn-xs" data-href="<?php echo site_url("performa/delete")."/". $dt['id_performa'];?>" data-toggle="modal" data-target="#confirm-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a>
+								<a class="btn btn-warning btn-xs" href="<?php echo site_url("kualitas/manage")."/". $dt['id_kualitas']; ?>"><span class="glyphicon glyphicon-edit"></span></a>
+								<a class="btn btn-danger btn-xs" data-href="<?php echo site_url("kualitas/delete")."/". $dt['id_kualitas'];?>" data-toggle="modal" data-target="#confirm-delete" href="#"><span class="glyphicon glyphicon-remove"></span></a>
 							</th>
 						  </tr>
 						<?php endforeach ?>
